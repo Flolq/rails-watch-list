@@ -1,14 +1,36 @@
-<h1><%= @list.name %></h1>
 
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://d18lkz4dllo6v2.cloudfront.net/cumulus_uploads/entry/2019-08-21/j.jpg?w=660);">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+
+<div class="container">
+<div class="cards">
 <% @list.bookmarks.each do |bookmark| %>
-<h2><%= Movie.find(bookmark.movie_id).title %></h2>
-<p><%= Movie.find(bookmark.movie_id).overview %></p>
-<%= link_to "Delete",
-            bookmark_path(bookmark),
-            method: :delete,
-            data: { confirm: "Are you sure?" } %>
+<div class="card-trip">
+  <img src="<%= Movie.find(bookmark.movie_id).poster_url %>" />
+  <div class="card-trip-infos">
+    <div>
+      <h2><%= Movie.find(bookmark.movie_id).title %></h2>
+      <p><%= Movie.find(bookmark.movie_id).overview %></p>
+    </div>
+    <h2 class="card-trip-pricing"> <%= link_to "Delete",
+      bookmark_path(bookmark),
+      method: :delete,
+      data: { confirm: "Are you sure?" } %>
+  </div>
+</div>
+<% end %>
+</div>
+</div>
+
+<h2>Add a movie</h1>
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.input :comment, class: "form-control" %>
+  <%= f.association :movie %>
+  <button type="submit" class="btn btn-primary">Submit</button>
 <% end %>
 
-<h3>Options</h3>
+
 <%= link_to 'Back', lists_path %>
-<%= link_to 'Add a bookmark', new_list_bookmark_path(params[:id]) %>
