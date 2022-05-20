@@ -1,5 +1,4 @@
 class ListsController < ApplicationController
-  has_one_attached :photo
 
   def index
     @lists = List.all
