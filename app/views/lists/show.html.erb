@@ -1,8 +1,9 @@
- <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.photo.attached? ? cl_image_path(@list.photo.key, height: 300, crop: :fill) : asset_url('cinema.jpeg') %>)">
-  <div class="container">
-    <h1><%= @list.name %></h1>
+<% if @list.photo.attached? %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path(@list.photo.key, height: 300, crop: :fill) : image_path('cinema.jpeg') %>)">
+    <div class="container">
+      <h1><%= @list.name %></h1>
+    </div>
   </div>
-</div>
 
 <div class="container">
 <div class="cards">
